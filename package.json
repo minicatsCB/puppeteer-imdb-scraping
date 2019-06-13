@@ -1,0 +1,23 @@
+{
+  "name": "puppeteer-imdb-scraping",
+  "version": "1.0.0",
+  "description": "puppeteer-imdb-scraping",
+  "main": "index.js",
+  "dependencies": {
+    "puppeteer": "1.17.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minicatsCB/puppeteer-imdb-scraping.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/minicatsCB/puppeteer-imdb-scraping/issues"
+  },
+  "homepage": "https://github.com/minicatsCB/puppeteer-imdb-scraping#readme"
+}
