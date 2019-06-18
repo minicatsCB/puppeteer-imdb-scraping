@@ -1,10 +1,20 @@
 const puppeteer = require('puppeteer');
 
 puppeteer.launch({ headless: true }).then(async browser => {
-    const page = await browser.newPage();
-    await page.goto("https://www.imdb.com/find?q=cars&s=tt&exact=true&ref_=fn_al_tt_ex");
-    let data = await getFilmsFromTable(page);
-    console.log(data);
+    let movieTitle = process.argv[2];
+    if (!movieTitle) {
+        console.log("Invalid parameters. Please, provide valid parameters:");
+        console.log("\t- node app.js <movieTitle>");
+        console.log("\n\tExample: node app.js matrix");
+        process.exitCode = 1;
+    } else {
+        console.log("Searching for movies...");
+        const page = await browser.newPage();
+        await page.goto(`https://www.imdb.com/find?q=${movieTitle}&s=tt&exact=true&ref_=fn_al_tt_ex`);
+        let data = await getFilmsFromTable(page);
+        console.log("Obtained movies:", data);
+    }
+
     await browser.close();
 });
 
