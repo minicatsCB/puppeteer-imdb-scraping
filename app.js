@@ -18,7 +18,7 @@ async function getFilmsFromTable(page) {
             let id = link.split("title/")[1].split("/?")[0];
             data.push({
                 "title": movie.querySelector(".result_text > a").textContent,
-                "text": movie.textContent,
+                "text": movie.textContent.trim(),
                 "link": link,
                 "id": id
             });
