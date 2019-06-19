@@ -1,21 +1,21 @@
 const puppeteer = require('puppeteer');
+const inquirer = require('inquirer');
 
 puppeteer.launch({ headless: true }).then(async browser => {
-    let movieTitle = process.argv[2];
-    if (!movieTitle) {
-        console.log("Invalid parameters. Please, provide valid parameters:");
-        console.log("\t- node app.js <movieTitle>");
-        console.log("\n\tExample: node app.js matrix");
-        process.exitCode = 1;
-    } else {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'movieTitle',
+            message: "Enter the title of the movie you want to search:"
+        }
+    ]).then(async answer => {
         console.log("Searching for movies...");
         const page = await browser.newPage();
-        await page.goto(`https://www.imdb.com/find?q=${movieTitle}&s=tt&exact=true&ref_=fn_al_tt_ex`);
+        await page.goto(`https://www.imdb.com/find?q=${answer.movieTitle}&s=tt&exact=true&ref_=fn_al_tt_ex`);
         let data = await getFilmsFromTable(page);
-        console.log("Obtained movies:", data);
-    }
-
-    await browser.close();
+        console.log("Obtained data", data);
+        await browser.close();
+    });
 });
 
 async function getFilmsFromTable(page) {
